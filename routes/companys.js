@@ -22,7 +22,7 @@ router.get('/allPost', function (req, res, next) {
         }
     })
 })
-/* GET Students listing. */
+/* GET Company listing. */
 router.get('/', function (req, res, next) {
     Company.find({}, function (err, doc) {
         if (err) {
