@@ -24,7 +24,7 @@ mongoose.connection.on("disconnected", function () {
 router.get('/allApply', function (req, res, next) {
   Student.find({}, function (err, doc) {
     let array = []
-    doc.map((item) => array.push(item.releaseList.map((item)=>item)))
+    doc.map((item) => array.push(item.releaseList.map((item) => item)))
     if (err) {
       res.json({
         status: '1',
@@ -101,6 +101,7 @@ router.post('/register', function (req, res, next) {
     studentId: studentId,
     userName: _this.userName,
     userPwd: _this.userPwd,
+    isVIP: false
   };
 
   Student.find({ userName: _this.userName }, function (err, doc) {
@@ -377,4 +378,24 @@ router.get('/delivery', function (req, res, next) {
   })
 })
 
+//使学生注册成为VIP
+router.get('/beVIP', function (req, res, next) {
+  let _this = req.query,
+    studentId = _this.studentId;
+  Student.update({ studentId: studentId }, { $set: { isVIP: true } }, function (err, doc) {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: '失败'
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: '成功'
+      });
+    }
+  })
+});
 module.exports = router;
