@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 require('../util/util')
 
 //连接MongoDB数据库
-mongoose.connect('mongodb://127.0.0.1:27017/myBlog');
+mongoose.connect('mongodb://127.0.0.1:27017/school');
 
 mongoose.connection.on("connected", function () {
   console.log("MongoDB connected success.")
@@ -398,4 +398,27 @@ router.get('/beVIP', function (req, res, next) {
     }
   })
 });
+//获取学生个人信息
+router.get('/info', function (req, res, next) {
+  let _this = req.query,
+    studentId = _this.studentId;
+  console.log(_this)
+  Student.find({ studentId: studentId }, function (err, doc) {
+    console.log(doc)
+    if (err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: '失败'
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: doc[0]
+      });
+    }
+  })
+});
+
 module.exports = router;

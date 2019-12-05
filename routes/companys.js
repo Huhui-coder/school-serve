@@ -135,6 +135,7 @@ router.post('/register', function (req, res, next) {
 router.post('/editCompanyInfo', function (req, res, next) {
     let _this = req.body,
         companyId = _this.companyId;
+        console.log(_this)
     Company.find({ companyId: companyId }, function (err, doc) {
         doc[0] = Object.assign(doc[0], { ..._this })
         doc[0].save((err, doc) => {
@@ -310,6 +311,7 @@ router.get('/delPost', function (req, res, next) {
 router.get('/beVIP', function (req, res, next) {
     let _this = req.query,
       companyId = _this.companyId;
+      console.log(_this)
     Company.update({ companyId: companyId }, { $set: { isVIP: true } }, function (err, doc) {
       if (err) {
         res.json({
@@ -322,6 +324,29 @@ router.get('/beVIP', function (req, res, next) {
           status: '0',
           msg: '',
           result: '成功'
+        });
+      }
+    })
+  });
+
+  //获取商家个人信息
+router.get('/info', function (req, res, next) {
+    let _this = req.query,
+      companyId = _this.companyId;
+    console.log(_this)
+    Company.find({ companyId: companyId }, function (err, doc) {
+      console.log(doc)
+      if (err) {
+        res.json({
+          status: '1',
+          msg: err.message,
+          result: '失败'
+        });
+      } else {
+        res.json({
+          status: '0',
+          msg: '',
+          result: doc[0]
         });
       }
     })
