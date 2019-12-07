@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
 router.post('/add', function (req, res, next) {
     let _this = req.body;
     console.log(_this)
-    let time = new Date().Format('yyyyMMddhhmmss');
+    let time = new Date().Format('yyyy-MM-dd hh:mm:ss')
     let params = {
         title: _this.title,
         type: _this.type,

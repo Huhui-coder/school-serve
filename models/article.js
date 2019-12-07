@@ -3,7 +3,7 @@ var mongoose = require('mongoose')
     "title":String,
     "type":String,
     "text":String,
-    "time": Date
+    "time": String
   })
 
 module.exports = mongoose.model("Article",articleSchema);

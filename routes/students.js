@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 require('../util/util')
 
 //连接MongoDB数据库
-mongoose.connect('mongodb://127.0.0.1:27017/school');
+mongoose.connect('mongodb://127.0.0.1:27017/schoolWebstie');
 
 mongoose.connection.on("connected", function () {
   console.log("MongoDB connected success.")
