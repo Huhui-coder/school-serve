@@ -10,6 +10,7 @@ var userSchema = new mongoose.Schema({
   "position":String,
   "area":String,
   "salary":Number,
+  "pdf":String,
   "deliveredList":[{  //已投递的岗位ID
     "postId":String
     }],

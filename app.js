@@ -9,6 +9,7 @@ var studentsRouter = require('./routes/students');
 var companysRouter = require('./routes/companys');
 var adminsRouter = require('./routes/admins');
 var articlesRouter = require('./routes/articles');
+var uploadsRouter = require('./routes/uploads');
 
 var app = express();
 
@@ -20,7 +21,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 //设置允许跨域访问该服务.
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*'); //请求源
@@ -42,6 +43,7 @@ app.use('/students', studentsRouter);
 app.use('/companys', companysRouter);
 app.use('/admins', adminsRouter);
 app.use('/articles', articlesRouter);
+app.use('/uploads', uploadsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
